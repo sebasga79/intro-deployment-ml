@@ -202,3 +202,8 @@ poetry.toml
 
 # LSP config files
 pyrightconfig.json
+
+*.json
+*.csv
+*.pkl 
+-ipynb_checkpoints/
