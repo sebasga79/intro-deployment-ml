@@ -15,10 +15,10 @@ jobs:
           source venv/bin/activate
       - name: Installing dependencies
         run: |
-          pip install dvc-gs==2.22.1
+          pip install dvc-gs
           pip install -r requirements_test.txt
       - name: Test API
         run: |
           export GOOGLE_APPLICATION_CREDENTIALS=$(python utilities/setter.py)
-          dvc pull model/model.pkl -r model-tracker
+          dvc pull model/model.pkl -r model-tracker --force
           pytest tests.py
