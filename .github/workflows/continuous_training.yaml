@@ -61,5 +61,5 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cat report.txt >> report.md 
-          cml-publish prediction_behavior.png --md >> report.md
+          cml comment create report.md --head "![inline](./prediction_behavior.png)"
           cml-send-comment report.md
