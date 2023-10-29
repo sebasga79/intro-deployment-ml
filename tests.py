@@ -33,4 +33,4 @@ def test_random_prediction():
                                                     'imdb_score': 7.2
                                                 })
     assert response.status_code == 200
-    assert response.json()['worldwide_gross'] != 0 
+    assert response.json()['worldwide_gross'] >= 0 

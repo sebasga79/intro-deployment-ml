@@ -19,6 +19,6 @@ jobs:
           pip install -r requirements_test.txt
       - name: Test API
         run: |
-          export GOOGLE_APPLICATION_CREDENTIALS=s(python utilities/setter.py)
+          export GOOGLE_APPLICATION_CREDENTIALS=$(python utilities/setter.py)
           dvc pull model/model.pkl -r model-tracker --force
           pytest tests.py
