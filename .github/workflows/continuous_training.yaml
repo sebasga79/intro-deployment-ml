@@ -19,16 +19,16 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.7  # Cambia esto a la versión de Python que necesitas
+          python-version: 3.11.5  # Cambia esto a la versión de Python que necesitas
 
       - name: Install dependencies
         run: |
-          pip install virtualenv
+          pip3 install virtualenv
           virtualenv venv
           source venv/bin/activate
           pip install -r src/requirements.txt
