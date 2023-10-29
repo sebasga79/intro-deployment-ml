@@ -32,12 +32,12 @@ jobs:
         run: |
           source venv/bin/activate
           export GOOGLE_APPLICATION_CREDENTIALS=$(python utilities/setter.py)
-          dvc pull model/model.pkl.dvc -r model-track
+          dvc pull model/model.pkl.dvc -r model-tracker
           dvc unprotect model/model.pkl
           dvc repro -f 
           echo "Training Completed"
-          dvc add model/model.pkl -r model-track --to-remote
-          dvc push model/model.pkl.dvc -r model-track
+          dvc add model/model.pkl -r model-tracker --to-remote
+          dvc push model/model.pkl.dvc -r model-tracker
       - name: Test new model
         run: |
           source venv/bin/activate
