@@ -33,8 +33,8 @@ jobs:
           dvc unprotect model/model.pkl
           dvc repro -f
           echo "Training Completed"
-          dvc add model/model.pkl -r model-tracker --to-remote --force
-          dvc push model/model.pkl -r model-tracker  --force
+          dvc add model/model.pkl -r model-tracker --to-remote
+          dvc push model/model.pkl -r model-tracker
 
 # Running dvc unprotect guarantees that the target files or directories (targets) in the workspace are physically “unlinked” from the cache and can be safely updated. 
       - name: Commit.dvc file changes
