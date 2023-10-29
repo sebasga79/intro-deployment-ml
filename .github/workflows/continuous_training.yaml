@@ -13,7 +13,8 @@ on:
         description: Why to run this?
         required: false
         default: running CT
-
+        
+# Agregamos permisos
 permissions:
   id-token: write # This is needed for OIDC 
   contents: write
