@@ -1,56 +1,80 @@
 name: Continuous Training
+
 on:
   push:
     branches:
       - workflow_continuous_training
-  # Para que github action corra el workflow con este cron tab, es decir cada 6 horas
   schedule:
     - cron: '0 */6 * * *'
-  # Por si queremos correrlo manualmente
   workflow_dispatch:
     inputs:
       reason:
         description: Why to run this?
         required: false
         default: running CT
+
 jobs:
   continuous-training:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
-      - name: Train model
-      env: 
-        SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+        uses: actions/checkout@v2
+      
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7  # Cambia esto a la versión de Python que necesitas
+
+      - name: Install dependencies
         run: |
-          pip3 install virtualenv
+          pip install virtualenv
           virtualenv venv
           source venv/bin/activate
           pip install -r src/requirements.txt
+
+      - name: Configure Google Application Credentials
+        run: |
           export GOOGLE_APPLICATION_CREDENTIALS=$(python utilities/setter.py)
+
+      - name: Pull DVC files
+        run: |
+          pip install dvc
           dvc pull model/model.pkl.dvc -r model-tracker
+
+      - name: Unprotect DVC files
+        run: |
           dvc unprotect model/model.pkl
+
+      - name: Reproduce DVC pipeline
+        run: |
           dvc repro -f
-          echo "Training Completed"
+
+      - name: Add and push DVC files
+        run: |
           dvc add model/model.pkl -r model-tracker --to-remote
           dvc push model/model.pkl -r model-tracker
 
-# Running dvc unprotect guarantees that the target files or directories (targets) in the workspace are physically “unlinked” from the cache and can be safely updated. 
-      - name: Commit.dvc file changes
+      - name: Commit DVC file changes
         run: |
           git config --local user.email "sebasga_79@yahoo.com"
           git config --local user.name "github-actions[bot]"
           git add model/model.pkl.dvc
           git commit -m "Updating model serialization"
-      - uses: ad-m/github-push-action@master
+
+      - name: Push to GitHub
+        uses: ad-m/github-push-action@master
         with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            branch: ${{ github.ref }}
-      - uses: iterative/setup-cml@v1
-      - name: Push metrics
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+
+      - name: Setup CML
+        uses: iterative/setup-cml@v1
+
+      - name: Publish metrics
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cat report.txt >> report.md 
+          cat report.txt >> report.md
           cml-publish prediction_behavior.png --md >> report.md
           cml-send-comment report.md
