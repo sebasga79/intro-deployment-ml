@@ -5,7 +5,7 @@ on:
       - workflow_continuous_training
   # Para que github action corra el workflow con este cron tab, es decir cada 6 horas
   schedule:
-    -cron: '0 */6 * * *'
+    - cron: '0 */6 * * *'
   # Por si queremos correrlo manualmente
   workflow_dispatch:
     inputs:
