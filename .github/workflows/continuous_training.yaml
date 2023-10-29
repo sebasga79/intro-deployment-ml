@@ -59,7 +59,7 @@ jobs:
       - name: Push metrics
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: | 
-          catreport.txt >> report.md 
-          cml-publish prediction_behavior.png --md >> report.md
-          cml-send-comment report.md
+        run: |
+          cat report.txt >> report.md 
+          echo "![](./prediction_behavior.png)" >> report.md
+          cml comment create report.md
