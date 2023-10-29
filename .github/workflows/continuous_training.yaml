@@ -13,13 +13,6 @@ on:
         description: Why to run this?
         required: false
         default: running CT
-# These permissions are needed to interact with GitHub's OIDC Token endpoint.
-permissions:
-  id-token: write # need this for OIDC  
-  contents: write
-  pull-requests: write 
-  issues: read
-  packages: none
 jobs:
   continuous-training:
     runs-on: ubuntu-latest
@@ -39,7 +32,7 @@ jobs:
           dvc unprotect model/model.pkl
           dvc repro -f
           echo "Training Completed"
-          dvc add model/model.pkl
+          dvc add model/model.pkl -r model-tracker --to-remote
           dvc push model/model.pkl -r model-tracker
 
 # Running dvc unprotect guarantees that the target files or directories (targets) in the workspace are physically “unlinked” from the cache and can be safely updated. 
