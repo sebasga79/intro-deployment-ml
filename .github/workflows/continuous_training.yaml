@@ -20,11 +20,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
       - name: Train model
-      env: 
-        SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+        env: 
+          SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
         run: |
           pip install --upgrade pip
-          pip3 install virtualenv
+          pip install virtualenv
           virtualenv venv
           source venv/bin/activate
           pip install -r src/requirements.txt
