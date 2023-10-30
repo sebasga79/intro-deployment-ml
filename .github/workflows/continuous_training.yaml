@@ -25,6 +25,10 @@ jobs:
   continuous-training:
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Node 16
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16'
       - name: Checkout repo
         uses: actions/checkout@v3
       - name: Train model
