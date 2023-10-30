@@ -1,8 +1,4 @@
 name: Continuous Training
-on:
-  push:
-    branches:
-      - workflow_continuous_training
   # Para que github action corra el workflow con este cron tab, es decir cada 6 horas
   schedule:
     - cron: '0 */6 * * *'
