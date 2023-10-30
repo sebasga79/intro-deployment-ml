@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+
+      - name: Debug SERVICE_ACCOUNT_KEY
+        run: echo $SERVICE_ACCOUNT_KEY
       - name: Set environment and bring the model
         run: |
           pip3 install virtualenv
