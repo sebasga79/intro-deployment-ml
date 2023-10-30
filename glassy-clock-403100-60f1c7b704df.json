@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "glassy-clock-403100",
+  "private_key_id": "60f1c7b704df0ba9290bc0e6328bbe2f102662bc",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCM6ye1ZQiaR/ax\n7ek0P22elDFkfUAwPfPYObHwfZIL6dRbhGHmoepld1ot2myY/H2GtVlf/MyEcnbj\ne4z8sHz9Rfpg25ToT2cGdd4NNnE7bM3mVYdO3E0PMV11cPdyLI8rOAvOPc1A0ZrC\np/f15z77ldsQyDVv5wJ7C8j4ggd7KNY/wCa2fpozva6LcjGwBbwT4Ku/Fz8J2ujG\noaqnlgyfYE3M6PugHVaOzcClu0RESlY4Z/ea8wn9Ryr4tL/vpOdBOy2vXNMuoPA7\nYWxE6HkUGey59kKiNHaw2ddrQyNij2qtveyojp+qGirgoP/PK3yzL0VIXnjQ54je\nPf2NEPHfAgMBAAECggEAFw9aMaRlan3RQF+q1Fp20Ub16DhY2ywgLaePV0ftMNbk\nYc+Bh9DCPzVvQ+ak88oJrpQZmowPWbMzgllTAnzND1M2vEfij7uCo/uAyU+56twM\nu58OY9jIIW7WGORSEdR53zwuLmNNpchHF4iOGqbrVxc4QIBKwlOew8zzZ7s7hysy\n6nZEypwjAApNVhA8JaYKPeJ8LcDNIfKeu6tsTwwbklxCeF+KpWjAFY47xWXA+p4s\ngnJ+Z8xJlC9ZZGyryBt1N4iy6iZksXXh+2tTB/GzdIqyzSrBRkdTbu/RY0uXzrl9\nRbZm2q1OIUtQkLOHiqw135lGodJTTrNOLpa1BaqoMQKBgQDCSSt1s4xRuumlJmp/\nuObzIdtav6nTe5J6RKfWxiCclXgIQIiQ8I1JMqd/HiEcMNb8jj23bci8+nr9RPqW\nXuFvTEru3gaQL5fVIvqfGziHrrOJPeniB9gSCH05P5Frre1IA61GzV/k424FLB4G\nZgWEweCCIdfIyrhSgbffNL5g0QKBgQC5rkvbNKWMalTknQE+vqx+yAPb2OOL4e5s\nYFapLUwsrTvbyV2cimkek0VdDKHepCZ+8pmofu3mNoPQIoJP7khiV5j5zK/Q397n\nbqN+WQRgJleXtGS8VjhOyTOi4eYWUiwMOJ2vgowanTLaMK8hB/QHucHcV/N/oD4Q\nCixNhzlTrwKBgEPVjEkCMYHvwtgYu6JwiqJlNdNPjBn80T3Dbt58OrKxNUGcVpJU\nit/9waGOgXz4SHfRqha7TBU/V2XKibuq0QctGhSgjKYXF+og1mRq+qfVBXZrmZeD\nqZtSP3aXjUyNY4V7UyqfVlXyWl2P88PEJzUdBCgrbM38ibK0++AA6F+hAoGAZO77\nKzCGITsX5KH4MExj5hMCDfrrTnnFKkKAOTx3YP3WQRZH/bU7iTRTC063mxguGOn1\nXyOIXJEbvANWRO7piBPIA1oh5HAdcj6xPxhSiZWuHbgg3kQcHa+/kvYrJc0LRqVs\nCiDz2e/D2dmHCXSSUbTHTei9Y44OzpdJF+e+4N8CgYEAqL3JIPN8SrE4wmV5+HjM\nsqk3Lzt5Ox9xWrfvYuzxtgsPuDIUmEF2eNlL+Bv/RX1raGlC/fQ0zpsX+V2FajkJ\n4dW6Mg0oeyhZwFMbMKEO6KzsLyKx6PIVEfnwDTBbUyNRls6Il62bC9nMSCBCJHxw\nbxHzTM9CdYuBXNbR0aFH5Hg=\n-----END PRIVATE KEY-----\n",
+  "client_email": "storage-manager@glassy-clock-403100.iam.gserviceaccount.com",
+  "client_id": "100516874379696519497",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/storage-manager%40glassy-clock-403100.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
