@@ -12,9 +12,6 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-
-      - name: Debug SERVICE_ACCOUNT_KEY
-        run: echo $SERVICE_ACCOUNT_KEY
       - name: Set environment and bring the model
         run: |
           pip3 install virtualenv
@@ -23,11 +20,11 @@ jobs:
           pip install dvc-gs
           export GOOGLE_APPLICATION_CREDENTIALS=$(python utilities/setter.py)
           dvc pull model/model.pkl.dvc -r model-tracker --force
-      - name: Set up GCLOUD SDK
-        uses: google-github-actions/setup-gcloud@v0
+      - name: Set up GCP Auth
+        uses: google-github-actions/auth@v0
         with:
-          credentials: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-          export_default_credentials: true
+          credentials_json: ${{ secrets.KEY }}
+      - uses: google-github-actions/setup-gcloud@v0
       - name: Build and Push
         run: |
           docker build . -t $REGISTRY_NAME:$GITHUB_SHA
