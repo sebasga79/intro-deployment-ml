@@ -1,0 +1,4 @@
+['remote "dataset-track"']
+    url = gs://platzi-model-dataset-tracker/dataset
+['remote "model-tracker"']
+    url = gs://platzi-model-dataset-tracker/model

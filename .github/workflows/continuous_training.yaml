@@ -1,0 +1,65 @@
+name: Continuous Training
+  # Para que github action corra el workflow con este cron tab, es decir cada 6 horas
+  schedule:
+    - cron: '0 */6 * * *'
+  # Por si queremos correrlo manualmente
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: Why to run this?
+        required: false
+        default: running CT
+
+# Agregamos permisos
+permissions:
+  id-token: write # This is needed for OIDC 
+  contents: write
+  issues: read
+  packages: none
+
+jobs:
+  continuous-training:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Node 16
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Train model
+        env: 
+          SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+        run: |
+          pip install --upgrade pip
+          pip install virtualenv
+          virtualenv venv
+          source venv/bin/activate
+          pip install -r src/requirements.txt
+          export GOOGLE_APPLICATION_CREDENTIALS=$(python utilities/setter.py)
+          dvc pull model/model.pkl.dvc -r model-tracker --force
+          dvc unprotect model/model.pkl
+          dvc repro -f
+          echo "Training Completed"
+          dvc add model/model.pkl -r model-tracker --to-remote
+          dvc push model/model.pkl -r model-tracker
+
+# Running dvc unprotect guarantees that the target files or directories (targets) in the workspace are physically “unlinked” from the cache and can be safely updated. 
+      - name: Commit.dvc file changes
+        run: |
+          git config --local user.email "sebasga_79@yahoo.com"
+          git config --local user.name "github-actions[bot]"
+          git add model/model.pkl.dvc
+          git commit -m "Updating model serialization"
+      - uses: ad-m/github-push-action@master
+        with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            branch: ${{ github.ref }}
+      - uses: iterative/setup-cml@v1
+      - name: Push metrics
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cat report.txt >> report.md 
+          echo "![prediction_behavior.png](./prediction_behavior.png)" >> report.md
+          cml comment create report.md
