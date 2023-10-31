@@ -3,20 +3,16 @@ on:
   push:
     branches:
       - workflow_continuous_training
-  # Para que github action corra el workflow con este cron tab, es decir cada 6 horas
   schedule:
     - cron: '0 */6 * * *'
-  # Por si queremos correrlo manualmente
   workflow_dispatch:
     inputs:
       reason:
         description: Why to run this?
         required: false
         default: running CT
-
-# Agregamos permisos
 permissions:
-  id-token: write # This is needed for OIDC 
+  id-token: write 
   contents: write
   issues: read
   packages: none
@@ -47,8 +43,6 @@ jobs:
           echo "Training Completed"
           dvc add model/model.pkl -r model-tracker --to-remote
           dvc push model/model.pkl -r model-tracker
-
-# Running dvc unprotect guarantees that the target files or directories (targets) in the workspace are physically “unlinked” from the cache and can be safely updated. 
       - name: Commit.dvc file changes
         run: |
           git config --local user.email "sebasga_79@yahoo.com"
